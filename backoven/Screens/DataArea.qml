@@ -2,4 +2,21 @@ import QtQuick 2.15
 
 Item{
     id: dataArea
+    property QtObject stateObject
+    property QtObject viewModel
+
+    // Choose heating mode
+    ChooseModeScreen
+    {
+        id: chooseModeScreen
+        anchors.fill: parent
+        visible: stateObject.isIdle
+    }
+
+    // Show heating screen
+    HeatingScreen{
+        id: heatingScreen
+        anchors.fill: parent
+        visible: !stateObject.isIdle
+    }
 }

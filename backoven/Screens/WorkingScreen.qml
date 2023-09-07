@@ -28,6 +28,7 @@ Item {
     }
     DataArea {
         id: dataArea
+        stateObject: parent.stateObject
         anchors.bottom: footer.top
         anchors.left: parent.left
         anchors.right: parent.right
