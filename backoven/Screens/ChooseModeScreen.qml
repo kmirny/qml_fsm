@@ -1,7 +1,12 @@
 import QtQuick 2.15
+import QtQuick.Layouts 1.3
 import "../icons"
 Item {
     id: chooseModeScreen
+    property QtObject viewModel
+    onVisibleChanged: {
+        console.log("modes:" + viewModel.heatingModes)
+    }
     Rectangle{
         anchors.fill: parent
         color: "grey"
@@ -31,10 +36,23 @@ Item {
             color: "transparent"
         }
 
-        HeatingModeListItem {
-            iconSource: Constants.iconAirCirculation
-            modeTitle: Constants.labelAirCirculation
+        ColumnLayout {
+
+            Repeater{
+                model: viewModel.heatingModes
+                delegate:
+                    HeatingModeListItem {
+                        iconSource: modelData.icon
+                        modeTitle: modelData.title
+                        modeType: modelData.modeType
+                        onSelected: modeType => {
+                            viewModel.setCurrentHeating(modeType)
+                            doSelectMode(modeType)
+                        }
+                }
+            }
         }
+
     }
 
 }

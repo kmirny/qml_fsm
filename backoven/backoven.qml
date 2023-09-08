@@ -13,8 +13,8 @@ Window {
 
     signal doTurnOn
     signal doStandby
-    signal doAirHeating
-    signal doTopBottomHeating
+
+    signal doSelectMode(int modeType)
     signal doStop
     signal doEditDone
     signal doEditTemperature

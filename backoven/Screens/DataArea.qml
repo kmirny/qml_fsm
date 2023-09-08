@@ -11,6 +11,7 @@ Item{
         id: chooseModeScreen
         anchors.fill: parent
         visible: stateObject.isIdle
+        viewModel: parent.viewModel
     }
 
     // Show heating screen
@@ -18,5 +19,6 @@ Item{
         id: heatingScreen
         anchors.fill: parent
         visible: !stateObject.isIdle
+        viewModel: parent.viewModel
     }
 }

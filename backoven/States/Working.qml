@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQml.StateMachine 6.4 as DSM
-
+import "../ViewModel"
 DSM.State {
     id: working
 
@@ -13,11 +13,13 @@ DSM.State {
         id: heatingOff
         DSM.SignalTransition{
             targetState: airHeating
-            signal: doAirHeating
+            signal: doSelectMode
+            guard: modeType === ViewModel.HeatingMode.AirCirculation
         }
         DSM.SignalTransition{
             targetState: topBottomHeating
-            signal: doTopBottomHeating
+            signal: doSelectMode
+            guard: modeType === ViewModel.HeatingMode.TopBottomHeating
         }
     }
 

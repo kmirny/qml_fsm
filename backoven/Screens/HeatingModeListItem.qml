@@ -4,8 +4,11 @@ Item{
     id: heatingModeListItem
     property alias iconSource: icon.source
     property alias modeTitle: name.text
-    anchors.left: parent.left
-    anchors.leftMargin: 20
+    property int modeType
+    signal selected(int modeType)
+
+    height: icon.height
+    width: icon.width + name.width + name.anchors.leftMargin
     Image{
         id: icon
 
@@ -19,5 +22,9 @@ Item{
 
         font.pixelSize: Constants.heatingModeTextSize
         color: Constants.heatingModeTextColor
+    }
+    MouseArea{
+        anchors.fill: parent
+        onClicked: selected(modeType)
     }
 }
