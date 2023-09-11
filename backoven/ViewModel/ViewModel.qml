@@ -6,6 +6,7 @@ QtObject {
     readonly property string title: "Bake with us"
     property QtObject currentHeating
 
+    onCurrentHeatingChanged: console.log("ViewModel: new currentHeating:" + currentHeating)
     property var heatingModes : []
     Component.onCompleted: {
         heatingModes.push(airCirculation)
@@ -14,30 +15,31 @@ QtObject {
 
     // Define Heating mode enum
     enum HeatingMode {
-        None,
-        AirCirculation,
-        TopBottomHeating
+        AirCirculation = 1,
+        TopBottomHeating = 2
     }
     function stopHeating()
     {
+        currentHeating.running = false
+        currentHeating.currentTemperature = 20
         currentHeating = null
-    }
-    function getAllHeatingModes()
-    {
-        return new Array
     }
 
     function setCurrentHeating(mode){
         switch(mode)
         {
-        case ViewModel.HeatingMode.AirCirculation:
+        case 1: //ViewModel.HeatingMode.AirCirculation:
             currentHeating = airCirculation
             break
-        case ViewModel.HeatingMode.TobBottomHeating:
+        case 2: //ViewModel.HeatingMode.TobBottomHeating:
             currentHeating = topBottomHeating
             break
         default:
-            console.log("Unknown heating mode provided")
+            console.log("Unknown heating mode provided: " + mode)
+        }
+        if (currentHeating)
+        {
+            currentHeating.running = true
         }
     }
 
@@ -47,8 +49,19 @@ QtObject {
         readonly property string icon: "../icons/air_circulation.png"
         readonly property int modeType: ViewModel.HeatingMode.AirCirculation
         property int temperature: 150
+        property int currentTemperature: 20
         readonly property int min_temperature: 50
         readonly property int max_temperature: 250
+        property alias running: temperatureTimer.running
+        property Timer temperatureTimer: Timer{
+            id: temperatureTimer
+            interval: 100
+            running: false
+            repeat: true
+            onTriggered: if (parent.currentTemperature != parent.temperature) {
+                parent.currentTemperature -= Math.abs(parent.currentTemperature - parent.temperature) / (parent.currentTemperature - parent.temperature)
+            }
+        }
     }
     property QtObject topBottomHeating: QtObject {
 
@@ -56,7 +69,18 @@ QtObject {
         readonly property string icon: "../icons/top_bottom.png"
         readonly property int modeType: ViewModel.HeatingMode.TopBottomHeating
         property int temperature: 170
+        property int currentTemperature: 20
         readonly property int min_temperature: 70
         readonly property int max_temperature: 200
+        property alias running: temperatureTimer1.running
+        property Timer temperatureTimer: Timer{
+            id: temperatureTimer1
+            interval: 100
+            running: false
+            repeat: true
+            onTriggered: if (parent.currentTemperature != parent.temperature) {
+                parent.currentTemperature -= Math.abs(parent.currentTemperature - parent.temperature) / (parent.currentTemperature - parent.temperature)
+            }
+        }
     }
 }

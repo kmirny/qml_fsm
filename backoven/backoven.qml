@@ -19,6 +19,14 @@ Window {
     signal doEditDone
     signal doEditTemperature
 
+    Connections{
+        target: stateMachine
+        function onHeatingStopped()
+        {
+            ViewModel.stopHeating()
+        }
+    }
+
     // State Machine
     StateMachine{
         id: stateMachine

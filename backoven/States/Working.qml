@@ -30,6 +30,7 @@ DSM.State {
         DSM.SignalTransition{
             targetState: heatingOff
             signal: doStop
+            onTriggered: heatingStopped()
         }
         DSM.State{
             id: heating

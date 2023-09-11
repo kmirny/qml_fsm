@@ -10,6 +10,8 @@ DSM.StateMachine {
     property alias workingState: stateWorking
     property alias stanbdyActive: stateStandby.active
 
+    signal heatingStopped()
+
     initialState: stateStandby
     DSM.State{
         id: stateStandby

@@ -38,7 +38,7 @@ Item{
             border.width: 2
             border.color: "white"
             radius: 20
-            color: "Yellow"
+            color: "orange"
             MouseArea{
                 anchors.fill: parent
                 onClicked: {

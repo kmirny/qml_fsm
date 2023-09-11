@@ -19,6 +19,6 @@ Item{
         id: heatingScreen
         anchors.fill: parent
         visible: !stateObject.isIdle
-        viewModel: parent.viewModel
+        viewModel: parent.viewModel.currentHeating
     }
 }

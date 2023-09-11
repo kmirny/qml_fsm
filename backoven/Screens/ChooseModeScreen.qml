@@ -30,11 +30,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        Rectangle{
-            anchors.fill: parent
-            border.color: "orange"
-            color: "transparent"
-        }
+
 
         ColumnLayout {
 
@@ -46,6 +42,7 @@ Item {
                         modeTitle: modelData.title
                         modeType: modelData.modeType
                         onSelected: modeType => {
+                            console.log("ChooseModeScreen: selected mode type:" + modeType)
                             viewModel.setCurrentHeating(modeType)
                             doSelectMode(modeType)
                         }
