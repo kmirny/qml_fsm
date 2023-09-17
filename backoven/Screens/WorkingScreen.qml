@@ -30,6 +30,7 @@ Item {
         id: dataArea
         stateObject: parent.stateObject
         viewModel: parent.viewModel
+
         anchors.bottom: footer.top
         anchors.left: parent.left
         anchors.right: parent.right

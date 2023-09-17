@@ -17,7 +17,7 @@ Window {
     signal doSelectMode(int modeType)
     signal doStop
     signal doEditDone
-    signal doEditTemperature
+    signal doEditTemperature(QtObject vm)
 
     Connections{
         target: stateMachine

@@ -32,6 +32,7 @@ DSM.State {
             signal: doStop
             onTriggered: heatingStopped()
         }
+
         DSM.State{
             id: heating
             DSM.State{
@@ -40,16 +41,24 @@ DSM.State {
             DSM.State{
                 id: topBottomHeating
             }
+            onEntered: console.log("--> heating")
+            onExited: console.log("<-- heating")
         }
         DSM.State{
             id: parameters
             initialState: parametersIdle
+            property QtObject viewModel
+            onEntered: console.log("--> parameters")
+            onExited: console.log("<-- parameters")
             DSM.State{
                 id: parametersIdle
                 DSM.SignalTransition{
                     targetState: editTemperature
                     signal: doEditTemperature
+                    onTriggered: vm => viewModel = vm
                 }
+                onEntered: console.log("--> parametersIdle")
+                onExited: console.log("<-- parametersIdle")
             }
             DSM.State{
                 id: editTemperature
@@ -57,6 +66,8 @@ DSM.State {
                     targetState: parametersIdle
                     signal: doEditDone
                 }
+                onEntered: console.log("--> editTemperature")
+                onExited: console.log("<-- editTemperature")
             }
         }
     }

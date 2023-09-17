@@ -18,7 +18,8 @@ Item{
     HeatingScreen{
         id: heatingScreen
         anchors.fill: parent
-        visible: !stateObject.isIdle
+        visible: !dataArea.stateObject.isIdle
+        stateObject: dataArea.stateObject
         viewModel: parent.viewModel.currentHeating
     }
 }

@@ -62,6 +62,14 @@ QtObject {
                 parent.currentTemperature -= Math.abs(parent.currentTemperature - parent.temperature) / (parent.currentTemperature - parent.temperature)
             }
         }
+        function incTemperature()
+        {
+            if (temperature < max_temperature) temperature++
+        }
+        function decTemperature()
+        {
+            if (temperature > min_temperature) temperature--
+        }
     }
     property QtObject topBottomHeating: QtObject {
 
@@ -81,6 +89,14 @@ QtObject {
             onTriggered: if (parent.currentTemperature != parent.temperature) {
                 parent.currentTemperature -= Math.abs(parent.currentTemperature - parent.temperature) / (parent.currentTemperature - parent.temperature)
             }
+        }
+        function incTemperature()
+        {
+            if (temperature < max_temperature) temperature++
+        }
+        function decTemperature()
+        {
+            if (temperature > min_temperature) temperature--
         }
     }
 }
